@@ -45,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void changer(View view){
+        Intent intent = new Intent(this, Ajouter.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
