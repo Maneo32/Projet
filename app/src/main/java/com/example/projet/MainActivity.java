@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,6 +57,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void AccesSupprimer(MenuItem menu){
         Intent intent = new Intent(this, Supprimer.class);
+        startActivity(intent);
+    }
+
+
+    public void AccesTerminer(MenuItem item) {
+        Intent intent = new Intent(this,Terminer.class);
         startActivity(intent);
     }
 }

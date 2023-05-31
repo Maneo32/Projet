@@ -19,6 +19,9 @@
             android:name=".Ajouter"
             android:exported="false" />
         <activity
+            android:name=".Terminer"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
