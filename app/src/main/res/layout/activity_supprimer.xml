@@ -8,7 +8,8 @@
     android:id="@+id/mainLayout">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+
+        android:id="@+id/toolbarSupprimer"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#673AB7"
@@ -16,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/menu_main"
         app:title="My Toolbar"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
         app:titleTextColor="#FFFFFF" />

@@ -14,13 +14,13 @@
         tools:targetApi="31">
         <activity
             android:name=".Supprimer"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Ajouter"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".Terminer"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
