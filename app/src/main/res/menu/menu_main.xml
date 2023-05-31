@@ -11,6 +11,7 @@
     </item>
     <item android:id="@+id/menu_supp"
         android:title="@string/menu_supp"
+        android:onClick="AccesSupprimer"
         app:showAsAction="never">
     </item>
 </menu>
