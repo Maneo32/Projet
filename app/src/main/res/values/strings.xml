@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Projet</string>
+    <string name="menu_list">List</string>
+    <string name="menu_termine">Terminé</string>
+    <string name="menu_supp">Supprimé</string>
+
 </resources>
