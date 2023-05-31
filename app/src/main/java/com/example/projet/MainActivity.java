@@ -3,6 +3,7 @@ package com.example.projet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+    public void changer(View view){
+        Intent intent = new Intent(this, Ajouter.class);
+        startActivity(intent);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
