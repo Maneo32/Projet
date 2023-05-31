@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Evenement> list=new ArrayList<Evenement>();
     private ConstraintLayout ConLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         list.add(new Evenement(1, "Tache 1", "description1", new Date()));
