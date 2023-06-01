@@ -3,8 +3,10 @@ package com.example.projet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 public class Supprimer extends AppCompatActivity {
 
@@ -15,11 +17,10 @@ public class Supprimer extends AppCompatActivity {
         Toolbar t = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbarSupprimer);
         setSupportActionBar(t);
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    
+    public void accesHomeSupprimer(View View) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
 

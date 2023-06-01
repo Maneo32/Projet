@@ -20,7 +20,7 @@ public class Terminer extends AppCompatActivity {
         setSupportActionBar(t);
     }
 
-    public void accesHome(View View) {
+    public void accesHomeTerminer(View View) {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
     }

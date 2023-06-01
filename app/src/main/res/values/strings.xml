@@ -4,5 +4,6 @@
     <string name="menu_termine">Terminé</string>
     <string name="menu_supp">Supprimé</string>
     <string name="supprimer">Supprimer</string>
+    <string name="recuperer">Récupérer</string>
 
 </resources>
