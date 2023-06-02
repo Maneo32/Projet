@@ -12,5 +12,6 @@
     <string name="envoyer">Envoyer</string>
     <string name="home">HOME</string>
     <string name="rappel">RAPPEL</string>
+    <string name="date">Date :</string>
 
 </resources>

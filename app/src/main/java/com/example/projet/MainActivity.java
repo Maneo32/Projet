@@ -53,17 +53,41 @@ public class MainActivity extends AppCompatActivity {
     private void performOnCreate() {
         setContentView(R.layout.activity_main);
 
-        StringBuilder builder = new StringBuilder();
+        LinearLayout container = findViewById(R.id.container);
+        container.removeAllViews();
 
+        StringBuilder builder = new StringBuilder();
         for (Evenement evenement : singleton.getList()) {
+            LinearLayout itemLayout = new LinearLayout(this);
+            itemLayout.setOrientation(LinearLayout.HORIZONTAL);
+            itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+
+            TextView textView = new TextView(this);
+            textView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            textView.setText(evenement.toString());
+
+            itemLayout.addView(checkBox);
+            itemLayout.addView(textView);
+
+            container.addView(itemLayout);
+
             builder.append(evenement.toString()).append("\n");
         }
 
         textView = findViewById(R.id.text);
-        textView.setText(builder.toString());
+        if (textView != null) {
+            textView.setText(builder.toString());
+        }
     }
-
-
 
 
 
