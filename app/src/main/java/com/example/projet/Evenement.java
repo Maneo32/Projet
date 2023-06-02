@@ -10,7 +10,18 @@ public class Evenement {
 
         private  int ordre;
         private String nom;
-        private String description;
+
+    @Override
+    public String toString() {
+        return "Evenement{" +
+                "ordre=" + ordre +
+                ", nom='" + nom + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                '}';
+    }
+
+    private String description;
         private Date date;
 
 

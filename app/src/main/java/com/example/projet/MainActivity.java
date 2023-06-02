@@ -10,46 +10,69 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Evenement> list=new ArrayList<Evenement>();
-    private ConstraintLayout ConLayout;
+    private EvenementListSingleton singleton = EvenementListSingleton.getInstance();
+    private TextView textView;
+
+
+    public static final String REQUEST_RESULT="REQUEST_RESULT";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        list.add(new Evenement(1, "Tache 1", "description1", new Date()));
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        for (int i =0; i<list.size(); i++){
-            TextView tv = new TextView(this);
-            tv.setText(list.get(i).getNom().toString());
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
-            tv.setGravity(Gravity.CENTER);
-            ConLayout = (ConstraintLayout) findViewById(R.id.mainLayout);
-            LinearLayout LinLayout = new LinearLayout(this);
-            LinLayout.setId(View.generateViewId());
-            LinLayout.setLayoutParams(new
-                    LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            LinLayout.setOrientation(LinearLayout.VERTICAL);
-            ConLayout.addView(LinLayout);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Toast.makeText(this, (String) (data.getStringExtra(REQUEST_RESULT)), Toast.LENGTH_LONG).show();
+            String result = (String) (data.getStringExtra(REQUEST_RESULT));
+            String[] str = result.split("!");
+            Evenement evt = new Evenement(Integer.parseInt(str[2]), str[0], str[1], new Date());
+            singleton.ajouterEvenement(evt);
 
-            LinLayout.addView(tv);
+            // Appeler onCreate() après la fin de onActivityResult()
+            performOnCreate();
         }
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-
-    public void changer(View view){
-        Intent intent = new Intent(this, Ajouter.class);
-        startActivity(intent);
+        // Utiliser performOnCreate() au lieu de setContentView()
+        performOnCreate();
     }
+
+    private void performOnCreate() {
+        setContentView(R.layout.activity_main);
+
+        StringBuilder builder = new StringBuilder();
+
+        for (Evenement evenement : singleton.getList()) {
+            builder.append(evenement.toString()).append("\n");
+        }
+
+        textView = findViewById(R.id.text);
+        textView.setText(builder.toString());
+    }
+
+
+
+
+
+    public void ajouter(View view){
+        Intent intent = new Intent(this, Ajouter.class);
+
+        startActivityForResult(intent, 1);
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
