@@ -35,8 +35,8 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
         EditText description = (EditText) findViewById(R.id.Description);
         Spinner ordre = (Spinner) findViewById(R.id.spinner);
         String l = "";
-        l=l+(description.getText().toString())+"!";
         l=l+(nom.getText().toString())+"!";
+        l=l+(description.getText().toString())+"!";
         l=l+(ordre.getSelectedItem().toString());
         returnIntent.putExtra(MainActivity.REQUEST_RESULT,l);
         setResult(RESULT_OK, returnIntent);

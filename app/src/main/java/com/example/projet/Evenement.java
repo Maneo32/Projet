@@ -1,7 +1,5 @@
 package com.example.projet;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
 import java.util.Date;
 
