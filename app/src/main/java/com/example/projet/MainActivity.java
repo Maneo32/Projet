@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.text);
         textView.setText(builder.toString());
     }
+
 
 
 

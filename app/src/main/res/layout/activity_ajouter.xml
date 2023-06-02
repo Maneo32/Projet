@@ -10,18 +10,18 @@
         android:id="@+id/Description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="434dp"
-        android:hint="Description"
+        android:hint="@string/description"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/buttonClose"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAjouter"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="38dp" />
 
     <androidx.appcompat.widget.Toolbar
-
-        android:id="@+id/toolbarterminer"
+        android:id="@+id/toolbarAjouter"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#673AB7"
@@ -29,9 +29,41 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="My Toolbar"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:titleTextColor="#FFFFFF" />
+        />
+    <Button
+        android:id="@+id/buttonHomeAjouter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="HOME"
+        android:backgroundTint="#FFFFFF"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="#673AB7"
+        app:icon="?attr/homeAsUpIndicator"
+        app:iconTint="#673AB7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="accesHomeAjouter"/>
+
+    <TextView
+        android:id="@+id/textViewAjouter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/rappel"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
@@ -45,23 +77,22 @@
         android:layout_marginEnd="156dp"
         android:layout_marginBottom="47dp"
         android:onClick="onClickClose"
-        android:text="Envoyer"
+        android:text="@string/envoyer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAjouter" />
 
 
     <EditText
         android:id="@+id/nom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:layout_marginBottom="344dp"
-        android:hint="Nom"
+        android:layout_marginBottom="400dp"
+        android:hint="@string/nom"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/buttonClose"
-        app:layout_constraintTop_toBottomOf="@+id/Description"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarAjouter"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -74,10 +105,9 @@
         android:layout_marginBottom="384dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom"
-        tools:ignore="MissingConstraints"
-        />
+        app:layout_constraintVertical_bias="0.060000002"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView"
@@ -87,10 +117,25 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="348dp"
         android:layout_marginBottom="5dp"
-        android:text="Priorité :"
+        android:text="@string/priorit"
         app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nom" />
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="423dp"
+        android:layout_height="289dp"
+        tools:layout_editor_absoluteX="-4dp"
+        tools:layout_editor_absoluteY="271dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date :"
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="248dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

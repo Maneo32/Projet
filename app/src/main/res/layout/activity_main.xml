@@ -79,7 +79,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img"
-        android:contentDescription="TODO" />
+        android:focusable="true" />
 
     <Button
         android:id="@+id/buttonSuppMain"
