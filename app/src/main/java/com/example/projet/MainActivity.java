@@ -59,22 +59,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             // Rafraîchir le contenu du TextView avec les nouvelles données
-            refreshTextView();
+            performOnCreate();
         }
     }
 
-    private void refreshTextView() {
-        StringBuilder builder = new StringBuilder();
 
-        db = new BaseDonnees(getApplicationContext());
-        ArrayList<Evenement> evt = db.recupererDonnees();
-        evt.add(new Evenement(1, "n", "d", new Date()));
-        for (Evenement evenement : evt) {
-            builder.append(evenement.toString()).append("\n");
-        }
-        textView = findViewById(R.id.text);
-        textView.setText(builder.toString());
-    }
 
 
     @Override
@@ -85,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         performOnCreate();
     }
 
+
     private void performOnCreate() {
         setContentView(R.layout.activity_main);
 
@@ -92,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
         container.removeAllViews();
 
         StringBuilder builder = new StringBuilder();
-        for (Evenement evenement : singleton.getList()) {
+        db = new BaseDonnees(getApplicationContext());
+        ArrayList<Evenement> evenements = singleton.getList();
+        evenements.addAll(db.recupererDonnees());
+        evenements.add(new Evenement(1, "n", "d", new Date()));
+
+        for (Evenement evenement : evenements) {
             LinearLayout itemLayout = new LinearLayout(this);
             itemLayout.setOrientation(LinearLayout.HORIZONTAL);
             itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
@@ -122,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         if (textView != null) {
             textView.setText(builder.toString());
         }
-        refreshTextView();
     }
 
 
