@@ -52,4 +52,9 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    public void accesHomeAjouter(View View) {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+    }
 }

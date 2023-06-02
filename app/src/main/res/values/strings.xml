@@ -5,6 +5,12 @@
     <string name="menu_supp">Supprimé</string>
     <string name="supprimer">Supprimer</string>
     <string name="recuperer">Récupérer</string>
-    <string name="validé">Validé</string>
+    <string name="validé">Valider</string>
+    <string name="description">Description</string>
+    <string name="priorit">Priorité :</string>
+    <string name="nom">Nom</string>
+    <string name="envoyer">Envoyer</string>
+    <string name="home">HOME</string>
+    <string name="rappel">RAPPEL</string>
 
 </resources>

@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -92,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     public void ajouter(View view){
         Intent intent = new Intent(this, Ajouter.class);
+
         startActivityForResult(intent, 1);
     }
 
@@ -114,6 +117,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,Terminer.class);
         startActivity(intent);
     }
-
-
 }
