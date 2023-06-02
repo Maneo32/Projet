@@ -30,11 +30,12 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("Delete from Rappel");
 
+        onCreate(db);
     }
 
     public ArrayList<Evenement> recupererDonnees() {
-        Log.i("TAG", "MyDatabaseHelper.getAllNotes ... " );
         SQLiteDatabase dbs = this.getReadableDatabase();
         ArrayList<Evenement> listeDonnees = new ArrayList<>();
         String query = "SELECT * FROM Rappel";
@@ -45,8 +46,6 @@ public class BaseDonnees extends SQLiteOpenHelper {
             String valeur2 = cursor.getString(1);
             String valeur3 = cursor.getString(2);
             String valeur4 = cursor.getString(3);
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Evenement donnees = new Evenement(Integer.parseInt(valeur3), valeur2, valeur1, new Date()); // Remplacez par votre propre classe de modèle de données
             listeDonnees.add(donnees);
         }

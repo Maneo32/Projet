@@ -1,17 +1,23 @@
 package com.example.projet;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         ArrayList<Integer> number = new ArrayList<Integer>();
@@ -34,10 +40,15 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
         EditText nom = (EditText) findViewById(R.id.nom);
         EditText description = (EditText) findViewById(R.id.Description);
         Spinner ordre = (Spinner) findViewById(R.id.spinner);
+        CalendarView calendarView = findViewById(R.id.calendarView);
+        Long timestamp = calendarView.getDate();
+        Date date = new Date(timestamp);
+
         String l = "";
         l=l+(nom.getText().toString())+"!";
-        l=l+(description.getText().toString())+"!";
-        l=l+(ordre.getSelectedItem().toString());
+        l=l+(description.getText())+"!";
+        l=l+(ordre.getSelectedItem().toString())+"!";
+        l=l+(timestamp);
         returnIntent.putExtra(MainActivity.REQUEST_RESULT,l);
         setResult(RESULT_OK, returnIntent);
         finish();

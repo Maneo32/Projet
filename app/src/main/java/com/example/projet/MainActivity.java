@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
 
-            TextView textView = new TextView(this);
+            textView = new TextView(this);
             textView.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -111,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
             container.addView(itemLayout);
 
             builder.append(evenement.toString()).append("\n");
-        }
-
-        textView = findViewById(R.id.text);
-        if (textView != null) {
-            textView.setText(builder.toString());
         }
     }
 
