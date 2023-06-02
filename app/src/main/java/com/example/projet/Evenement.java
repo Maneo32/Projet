@@ -2,6 +2,7 @@ package com.example.projet;
 
 import android.graphics.Color;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,12 +14,13 @@ public class Evenement {
 
     @Override
     public String toString() {
-        return "Evenement{" +
-                "ordre=" + ordre +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                '}';
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy");
+        String dateMieux = sdf.format(date);
+        return "Rappel :" +
+                "\n Titre :'" + nom + '\'' +
+                "\n Description :'" + description + '\'' +
+                " \n Ordre : " + ordre +
+                "\n Date :" + dateMieux +"\n";
     }
 
     private String description;
