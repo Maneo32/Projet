@@ -152,10 +152,28 @@ public class MainActivity extends AppCompatActivity {
             for (Evenement evt : supp) {
                 SQLiteDatabase dbs = db.getWritableDatabase();
                 db.supp(dbs, evt.getId(), evt.getDate().getTime(), evt.getDescription(), evt.getNom(), evt.getOrdre());
+                recreate();
+            }
+
+        }
+    }
+
+
+    public void valider(View view) {
+        if (supp.size() != 0) {
+            for (Evenement evt : supp) {
+                SQLiteDatabase dbs = db.getWritableDatabase();
+                db.val(dbs, evt.getId(), evt.getDate().getTime(), evt.getDescription(), evt.getNom(), evt.getOrdre());
 
                 recreate();
             }
 
         }
     }
+
+
+
+
+
 }
+

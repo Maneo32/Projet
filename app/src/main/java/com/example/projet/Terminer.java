@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class Terminer extends AppCompatActivity {
 
-    private EvenementListSingleton singleton = EvenementListSingleton.getInstance();
+    BaseDonnees db = new BaseDonnees(this);
     private TextView textView;
     @SuppressLint("MissingInflatedId")
     @Override
@@ -21,7 +21,7 @@ public class Terminer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terminer);
         StringBuilder builder = new StringBuilder();
-        for (Evenement evenement : singleton.getListTermines()) {
+        for (Evenement evenement : db.recupererTermine()) {
             builder.append(evenement.toString()).append("\n");
         }
 

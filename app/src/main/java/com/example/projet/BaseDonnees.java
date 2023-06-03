@@ -41,6 +41,12 @@ public class BaseDonnees extends SQLiteOpenHelper {
         Log.d("TAG", "Effacé");
     }
 
+    public void val(SQLiteDatabase db, int id, long date, String desc, String nom, int ordre) {
+        db.execSQL("DELETE FROM Rappel WHERE id = ?", new Object[]{id});
+        db.execSQL("INSERT INTO termine (nom, description, ordre, date) VALUES (?, ?, ?, ?)", new Object[]{nom, desc, ordre, date});
+        Log.d("TAG", "terminé");
+    }
+
 
     public ArrayList<Evenement> recupererDonnees() {
         SQLiteDatabase dbs = this.getReadableDatabase();
@@ -66,6 +72,27 @@ public class BaseDonnees extends SQLiteOpenHelper {
         SQLiteDatabase dbs = this.getReadableDatabase();
         ArrayList<Evenement> listeDonnees = new ArrayList<>();
         String query = "SELECT * FROM supp";
+        Cursor cursor = dbs.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            String valeur1 = cursor.getString(0);
+            String valeur2 = cursor.getString(1);
+            String valeur3 = cursor.getString(2);
+            String valeur4 = cursor.getString(3);
+            String valeur5 = cursor.getString(4);
+            Evenement donnees = new Evenement(Integer.parseInt(valeur5), Integer.parseInt(valeur3), valeur2, valeur1, new Date(Long.parseLong(valeur4))); // Remplacez par votre propre classe de modèle de données
+            listeDonnees.add(donnees);
+        }
+
+        cursor.close();
+        return listeDonnees;
+    }
+
+
+
+    public ArrayList<Evenement> recupererTermine() {
+        SQLiteDatabase dbs = this.getReadableDatabase();
+        ArrayList<Evenement> listeDonnees = new ArrayList<>();
+        String query = "SELECT * FROM termine";
         Cursor cursor = dbs.rawQuery(query, null);
         while (cursor.moveToNext()) {
             String valeur1 = cursor.getString(0);
