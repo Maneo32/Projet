@@ -20,7 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-        ArrayList<Integer> number = new ArrayList<Integer>();
+        private ArrayList<Integer> number = new ArrayList<Integer>();
+        private long selectedDateInMillis = new Date().getTime();
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +31,21 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
         number.add(1);
         number.add(2);
         number.add(3);
-            ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,number);
-            aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spin.setAdapter(aa);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,number);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
+            CalendarView calendarView = findViewById(R.id.calendarView);
+            calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+                @Override
+                public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                    // Ici, vous pouvez récupérer la date sélectionnée et la convertir en long
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.set(year, month, dayOfMonth);
+                    selectedDateInMillis = calendar.getTimeInMillis();
+
+                    // Utilisez la valeur de selectedDateInMillis comme vous le souhaitez
+                }
+            });
         }
 
     public void onClickClose(View view) {
@@ -40,15 +53,12 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
         EditText nom = (EditText) findViewById(R.id.nom);
         EditText description = (EditText) findViewById(R.id.Description);
         Spinner ordre = (Spinner) findViewById(R.id.spinner);
-        CalendarView calendarView = findViewById(R.id.calendarView);
-        Long timestamp = calendarView.getDate();
-        Date date = new Date(timestamp);
-
         String l = "";
         l=l+(nom.getText().toString())+"!";
         l=l+(description.getText())+"!";
         l=l+(ordre.getSelectedItem().toString())+"!";
-        l=l+(timestamp);
+        l=l+(selectedDateInMillis);
+
         returnIntent.putExtra(MainActivity.REQUEST_RESULT,l);
         setResult(RESULT_OK, returnIntent);
         finish();

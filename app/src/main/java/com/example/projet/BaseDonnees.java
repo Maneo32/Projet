@@ -2,6 +2,7 @@ package com.example.projet;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -22,17 +23,21 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE Rappel (nom TEXT, description TEXT, ordre TEXT, date TEXT)";
+        String createTableQuery = "CREATE TABLE Rappel (nom TEXT, description TEXT, ordre TEXT, date TEXT, id int)";
         db.execSQL(createTableQuery);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("Delete from Rappel");
 
-        onCreate(db);
+    }
+
+    public void supp(SQLiteDatabase db, int id) {
+        db.execSQL("delete from Rappel where id="+id);
+        Log.d("TAG", "Effacé");
     }
 
     public ArrayList<Evenement> recupererDonnees() {
@@ -40,17 +45,20 @@ public class BaseDonnees extends SQLiteOpenHelper {
         ArrayList<Evenement> listeDonnees = new ArrayList<>();
         String query = "SELECT * FROM Rappel";
         Cursor cursor = dbs.rawQuery(query, null);
-
+        int i =0;
         while (cursor.moveToNext()) {
             String valeur1 = cursor.getString(0);
             String valeur2 = cursor.getString(1);
             String valeur3 = cursor.getString(2);
             String valeur4 = cursor.getString(3);
-            Evenement donnees = new Evenement(Integer.parseInt(valeur3), valeur2, valeur1, new Date()); // Remplacez par votre propre classe de modèle de données
+            String valeur5 = cursor.getString(4);
+            Evenement donnees = new Evenement(Integer.parseInt(valeur5), Integer.parseInt(valeur3), valeur2, valeur1, new Date(Long.parseLong(valeur4))); // Remplacez par votre propre classe de modèle de données
             listeDonnees.add(donnees);
+            i=i+1;
         }
 
         cursor.close();
         return listeDonnees;
     }
+
 }

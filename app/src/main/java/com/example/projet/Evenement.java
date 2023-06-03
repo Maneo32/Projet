@@ -9,8 +9,12 @@ import java.util.Date;
 public class Evenement {
 
 
+    private int id;
         private  int ordre;
         private String nom;
+
+    private String description;
+    private Date date;
 
     @Override
     public String toString() {
@@ -20,14 +24,14 @@ public class Evenement {
                 "\n Titre :'" + nom + '\'' +
                 "\n Description :'" + description + '\'' +
                 " \n Ordre : " + ordre +
-                "\n Date :" + dateMieux +"\n";
+                "\n Date :" + dateMieux +"\n"+
+                "\n id :" + id +"\n";
     }
 
-    private String description;
-        private Date date;
 
 
-        public Evenement(int ordre, String nom, String description, Date date){
+        public Evenement(int id, int ordre, String nom, String description, Date date){
+            this.id=id;
             ArrayList l = new ArrayList();
             l.add(1);
             l.add(2);
@@ -41,6 +45,9 @@ public class Evenement {
 
         }
 
+    public int getId() {
+        return id;
+    }
     public int getOrdre() {
         return ordre;
     }

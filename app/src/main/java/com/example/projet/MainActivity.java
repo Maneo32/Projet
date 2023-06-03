@@ -17,7 +17,9 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,11 +33,11 @@ import com.example.projet.BaseDonnees;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EvenementListSingleton singleton = EvenementListSingleton.getInstance();
+    private ArrayList<Evenement> supp = new ArrayList<Evenement>();
     private TextView textView;
     private BaseDonnees db;
 
-    public static final String REQUEST_RESULT="REQUEST_RESULT";
+    public static final String REQUEST_RESULT = "REQUEST_RESULT";
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -44,26 +46,21 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(this, "Rappel créé", Toast.LENGTH_LONG).show();
             String result = data.getStringExtra(REQUEST_RESULT);
             String[] str = result.split("!");
-            Evenement evt = new Evenement(Integer.parseInt(str[2]), str[0], str[1], new Date());
-            singleton.ajouterEvenement(evt);
-
+            Log.d("TAG", str[3]);
             db = new BaseDonnees(this);
             SQLiteDatabase dbs = db.getWritableDatabase();
             ContentValues values = new ContentValues();
-            values.put("nom", str[0]);
-            values.put("description", str[1]);
+            values.put("nom", str[1]);
+            values.put("description", str[0]);
             values.put("ordre", str[2]);
-            values.put("date", evt.getDate().toString());
-
-            long newRowId = dbs.insert("Rappel", null, values);
+            values.put("date", str[3]);
+            dbs.insert("Rappel", null, values);
 
 
             // Rafraîchir le contenu du TextView avec les nouvelles données
             performOnCreate();
         }
     }
-
-
 
 
     @Override
@@ -83,9 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuilder builder = new StringBuilder();
         db = new BaseDonnees(getApplicationContext());
-        ArrayList<Evenement> evenements = singleton.getList();
+        ArrayList<Evenement> evenements = new ArrayList<Evenement>();
         evenements.addAll(db.recupererDonnees());
-        evenements.add(new Evenement(1, "n", "d", new Date()));
 
         for (Evenement evenement : evenements) {
             LinearLayout itemLayout = new LinearLayout(this);
@@ -95,6 +91,18 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT));
 
             CheckBox checkBox = new CheckBox(this);
+            checkBox.setId(evenement.getId());
+            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        supp.add(evenement);
+                        Log.d("Tag", "evt ajouté : " + evenement.getId());
+                    } else {
+                        supp.remove(evenement);
+                    }
+                }
+            });
             checkBox.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -115,10 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
-
-    public void ajouter(View view){
+    public void ajouter(View view) {
         Intent intent = new Intent(this, Ajouter.class);
 
         startActivityForResult(intent, 1);
@@ -131,14 +136,24 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public void AccesSupprimer(MenuItem menu){
+    public void AccesSupprimer(MenuItem menu) {
         Intent intent = new Intent(this, Supprimer.class);
         startActivity(intent);
     }
 
 
     public void AccesTerminer(MenuItem item) {
-        Intent intent = new Intent(this,Terminer.class);
+        Intent intent = new Intent(this, Terminer.class);
         startActivity(intent);
+    }
+
+    public void supprimer(View view) {
+        if (supp.size() != 0) {
+            for (Evenement evt : supp) {
+                SQLiteDatabase dbs = db.getWritableDatabase();
+                db.supp(dbs, evt.getId());
+                recreate();
+            }
+        }
     }
 }
