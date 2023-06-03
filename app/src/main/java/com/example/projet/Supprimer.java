@@ -12,14 +12,14 @@ import android.widget.TextView;
 
 public class Supprimer extends AppCompatActivity {
 
-    private EvenementListSingleton singleton = EvenementListSingleton.getInstance();
     private TextView textView;
+    BaseDonnees db = new BaseDonnees(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supprimer);
         StringBuilder builder = new StringBuilder();
-        for (Evenement evenement : singleton.getListSupprimes()) {
+        for (Evenement evenement : db.recupererSupp()) {
             builder.append(evenement.toString()).append("\n");
         }
 

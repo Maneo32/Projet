@@ -151,9 +151,11 @@ public class MainActivity extends AppCompatActivity {
         if (supp.size() != 0) {
             for (Evenement evt : supp) {
                 SQLiteDatabase dbs = db.getWritableDatabase();
-                db.supp(dbs, evt.getId());
+                db.supp(dbs, evt.getId(), evt.getDate().getTime(), evt.getDescription(), evt.getNom(), evt.getOrdre());
+
                 recreate();
             }
+
         }
     }
 }
