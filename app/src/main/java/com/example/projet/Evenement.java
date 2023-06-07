@@ -24,8 +24,7 @@ public class Evenement {
                 "\n Titre :'" + nom + '\'' +
                 "\n Description :'" + description + '\'' +
                 " \n Ordre : " + ordre +
-                "\n Date :" + dateMieux +"\n"+
-                "\n id :" + id +"\n";
+                "\n Date :" + dateMieux;
     }
 
 

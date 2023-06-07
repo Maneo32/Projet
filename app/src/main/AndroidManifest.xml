@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Projet"
         tools:targetApi="31">
         <activity
+            android:name=".Modifier"
+            android:exported="false" />
+        <activity
             android:name=".Supprimer"
             android:exported="true" />
         <activity
