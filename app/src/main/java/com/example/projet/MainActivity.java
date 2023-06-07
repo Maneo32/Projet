@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         StringBuilder builder = new StringBuilder();
         db = new BaseDonnees(getApplicationContext());
         ArrayList<Evenement> evenements = new ArrayList<Evenement>();
+        SQLiteDatabase dbs = db.getWritableDatabase();
+
         evenements.addAll(db.recupererDonnees());
 
         for (Evenement evenement : evenements) {
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         supp.add(evenement);
-                        Log.d("Tag", "evt ajouté : " + evenement.getId());
+                        Log.d("Tag", "Rappel ajouté : " + evenement.getId());
                     } else {
                         supp.remove(evenement);
                     }
