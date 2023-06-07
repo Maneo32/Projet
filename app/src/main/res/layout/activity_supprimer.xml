@@ -5,11 +5,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Supprimer"
-    android:id="@+id/mainLayout">
+    >
+
+
+    <ScrollView
+        android:layout_width="407dp"
+        android:layout_height="718dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSupp">
+
+        <LinearLayout
+            android:id="@+id/containerSupp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Layout d'un élément avec CheckBox et TextView -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textSupp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginEnd="83dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbarTer"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+    </ScrollView>
+
+
 
     <androidx.appcompat.widget.Toolbar
 
-        android:id="@+id/toolbarSupprimer"
+        android:id="@+id/toolbarSupp"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#673AB7"
@@ -17,30 +70,33 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:title="RAPPEL"
+        app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:titleTextColor="#FFFFFF" />
+
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/buttonSupp"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:onClick="supp"
         android:layout_marginEnd="250dp"
         android:layout_marginBottom="30dp"
         android:text="@string/supprimer"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
+        android:id="@+id/button"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:onClick="supp"
+        android:layout_marginEnd="250dp"
         android:layout_marginBottom="30dp"
         android:text="@string/recuperer"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5" />
+        app:layout_constraintEnd_toEndOf="parent" />
     <Button
-        android:id="@+id/buttonHomeSupprimer"
+        android:id="@+id/buttonHomeSupp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -58,48 +114,5 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="accesHomeSupprimer"/>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="RAPPEL"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FFFFFF"
-        android:textSize="24sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.922"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ScrollView
-        android:layout_width="407dp"
-        android:layout_height="718dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/textSupp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="83dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            tools:ignore="MissingConstraints" />
-
-    </ScrollView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
