@@ -16,8 +16,10 @@
         android:layout_marginEnd="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarTer">
+        app:layout_constraintTop_toBottomOf="@+id/toolbarTer"
+        app:layout_constraintVertical_bias="0.557">
 
         <LinearLayout
             android:id="@+id/containerTer"
@@ -51,14 +53,7 @@
         </LinearLayout>
 
 
-
-
-
-
-
     </ScrollView>
-
-
 
     <androidx.appcompat.widget.Toolbar
 
@@ -79,11 +74,30 @@
         android:layout_width="115dp"
         android:layout_height="50dp"
         android:onClick="deleteTer"
-        android:layout_marginEnd="250dp"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="30dp"
         android:text="@string/supprimer"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="RAPPEL"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.922"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <Button
         android:id="@+id/buttonHomeTerminer"
         android:layout_width="wrap_content"
