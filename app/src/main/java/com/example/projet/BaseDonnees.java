@@ -112,10 +112,15 @@ public class BaseDonnees extends SQLiteOpenHelper {
         return listeDonnees;
     }
 
+    public void recuperer(SQLiteDatabase db, int id, long date, String desc, String nom, int ordre){
+        db.execSQL("INSERT INTO Rappel (nom, description, ordre, date) VALUES (?, ?, ?, ?)", new Object[]{nom, desc, ordre, date});
+        db.execSQL("delete from supp where id=?", new Object[]{id});
+    }
+
     public void delTer(SQLiteDatabase db, int id) {
         db.execSQL("delete from termine where id=?", new Object[]{id});
     }
     public void delSupp(SQLiteDatabase db, int id) {
-        db.execSQL("delete from supp where iid=?", new Object[]{id});
+        db.execSQL("delete from supp where id=?", new Object[]{id});
     }
 }
