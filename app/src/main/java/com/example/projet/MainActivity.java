@@ -175,7 +175,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
+    public void accesModif(View View) {
+        Intent intent = new Intent(this,Modifier.class);
+        startActivity(intent);
+    }
 }
 
