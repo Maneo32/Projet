@@ -9,6 +9,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="407dp"
         android:layout_height="718dp"
         android:layout_marginStart="2dp"
@@ -19,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,11 +50,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-
-
-
-
 
 
     </ScrollView>
@@ -90,9 +86,9 @@
         android:id="@+id/buttonSuppMain"
         android:layout_width="115dp"
         android:layout_height="50dp"
-        android:onClick="supprimer"
-        android:layout_marginEnd="250dp"
+        android:layout_marginEnd="280dp"
         android:layout_marginBottom="30dp"
+        android:onClick="supprimer"
         android:text="@string/supprimer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -101,10 +97,22 @@
         android:id="@+id/buttonValideMain"
         android:layout_width="115dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="30dp"
         android:onClick="valider"
         android:text="@string/validé"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/buttonModif"
+        android:layout_width="115dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginBottom="30dp"
+        android:text="@string/modif"
+        android:onClick="accesModif"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

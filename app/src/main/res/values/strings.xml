@@ -13,5 +13,6 @@
     <string name="home">HOME</string>
     <string name="rappel">RAPPEL</string>
     <string name="date">Date :</string>
+    <string name="modif">Modifier</string>
 
 </resources>
