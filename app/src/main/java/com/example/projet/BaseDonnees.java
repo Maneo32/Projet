@@ -108,4 +108,10 @@ public class BaseDonnees extends SQLiteOpenHelper {
         return listeDonnees;
     }
 
+    public void delTer(SQLiteDatabase db, int id) {
+        db.execSQL("delete from termine where id=?", new Object[]{id});
+    }
+    public void delSupp(SQLiteDatabase db, int id) {
+        db.execSQL("delete from supp where iid=?", new Object[]{id});
+    }
 }
