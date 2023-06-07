@@ -26,8 +26,12 @@ public class BaseDonnees extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTableQuery = "CREATE TABLE Rappel (nom TEXT, description TEXT, ordre TEXT, date TEXT, id int)";
+        String createTableQuery = "CREATE TABLE Rappel (nom TEXT, description TEXT, ordre TEXT, date TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        String createTableQuery2 = "CREATE TABLE supp (nom TEXT, description TEXT, ordre TEXT, date TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        String createTableQuery3 = "CREATE TABLE Termine (nom TEXT, description TEXT, ordre TEXT, date TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)";
         db.execSQL(createTableQuery);
+        db.execSQL(createTableQuery2);
+        db.execSQL(createTableQuery3);
     }
 
     @Override
