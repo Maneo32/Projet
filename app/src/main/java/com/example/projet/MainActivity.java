@@ -29,11 +29,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
+
 import com.example.projet.BaseDonnees;
 
 public class MainActivity extends AppCompatActivity {
+    private ArrayList<Evenement> supp = new ArrayList<>();
 
-    private ArrayList<Evenement> supp = new ArrayList<Evenement>();
     private TextView textView;
     private BaseDonnees db;
 
@@ -43,22 +45,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            //Toast.makeText(this, "Rappel créé", Toast.LENGTH_LONG).show();
-            String result = data.getStringExtra(REQUEST_RESULT);
-            String[] str = result.split("!");
-            Log.d("TAG", str[3]);
-            db = new BaseDonnees(this);
-            SQLiteDatabase dbs = db.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put("nom", str[1]);
-            values.put("description", str[0]);
-            values.put("ordre", str[2]);
-            values.put("date", str[3]);
-            dbs.insert("Rappel", null, values);
+            if (Objects.equals(data.getStringExtra(REQUEST_RESULT), "modif")) {
+                recreate();
+            } else {
+                //Toast.makeText(this, "Rappel créé", Toast.LENGTH_LONG).show();
+                String result = data.getStringExtra(REQUEST_RESULT);
+                String[] str = result.split("!");
+                Log.d("TAG", str[3]);
+                db = new BaseDonnees(this);
+                SQLiteDatabase dbs = db.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put("nom", str[1]);
+                values.put("description", str[0]);
+                values.put("ordre", str[2]);
+                values.put("date", str[3]);
+                dbs.insert("Rappel", null, values);
 
 
-            // Rafraîchir le contenu du TextView avec les nouvelles données
-            performOnCreate();
+                // Rafraîchir le contenu du TextView avec les nouvelles données
+                performOnCreate();
+            }
         }
     }
 
@@ -176,8 +182,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void accesModif(View View) {
-        Intent intent = new Intent(this,Modifier.class);
-        startActivity(intent);
+        if (supp.size()==1) {
+            Intent intent = new Intent(this, Modifier.class);
+            intent.putExtra("nom", supp.get(0).getNom());
+            intent.putExtra("desc", supp.get(0).getDescription());
+            intent.putExtra("ordre", supp.get(0).getOrdre());
+            intent.putExtra("date", supp.get(0).getDate());
+            intent.putExtra("id", supp.get(0).getId());
+            startActivityForResult(intent, 2);
+        }
     }
 }
 

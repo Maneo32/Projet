@@ -21,6 +21,7 @@ import java.util.Date;
 
 public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         private ArrayList<Integer> number = new ArrayList<Integer>();
+
         private long selectedDateInMillis = new Date().getTime();
         @Override
     protected void onCreate(Bundle savedInstanceState) {

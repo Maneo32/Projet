@@ -123,4 +123,10 @@ public class BaseDonnees extends SQLiteOpenHelper {
     public void delSupp(SQLiteDatabase db, int id) {
         db.execSQL("delete from supp where id=?", new Object[]{id});
     }
+
+
+    public void modifier(SQLiteDatabase db, int id, String nom, String desc, int ordre, String date){
+        db.execSQL("Insert into Rappel (nom, description, ordre, date) values (?,?,?,?)", new Object[]{nom, desc, ordre, date});
+        db.execSQL("delete from Rappel where id=?", new Object[]{id});
+    }
 }
