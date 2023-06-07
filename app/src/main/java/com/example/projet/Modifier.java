@@ -22,6 +22,8 @@ import java.util.Date;
 public class Modifier extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
     private ArrayList<Integer> number = new ArrayList<Integer>();
     private long selectedDateInMillis = new Date().getTime();
+    private int hour = new Date().getHours();
+    private int minute = new Date().getMinutes();
     private BaseDonnees db;
 
     @Override
@@ -73,27 +75,39 @@ public class Modifier extends AppCompatActivity implements AdapterView.OnItemSel
         Spinner ordre = (Spinner) findViewById(R.id.spinnerModif);
         int id = (int) getIntent().getSerializableExtra("id");
         Date date = (Date) getIntent().getSerializableExtra("date");
-        db.modifier(db.getWritableDatabase(), id, nom.getText().toString(), description.getText().toString(),Integer.parseInt(ordre.getSelectedItem().toString()), Long.toString(selectedDateInMillis));
 
-        returnIntent.putExtra(MainActivity.REQUEST_RESULT,"modif");
+        // Créez une nouvelle instance de Calendar
+        Calendar calendar = Calendar.getInstance();
+
+        // Définissez la date sélectionnée
+        calendar.setTime(date);
+
+        // Définissez l'heure et les minutes sélectionnées
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+
+        // Récupérez le temps en millisecondes
+        long selectedDateTimeInMillis = calendar.getTimeInMillis();
+
+        db.modifier(db.getWritableDatabase(), id, nom.getText().toString(), description.getText().toString(), Integer.parseInt(ordre.getSelectedItem().toString()), Long.toString(selectedDateTimeInMillis));
+
+        returnIntent.putExtra(MainActivity.REQUEST_RESULT, "modif");
         setResult(RESULT_OK, returnIntent);
         finish();
     }
 
 
+
     public void showTimePickerDialog(View view) {
-        Calendar currentTime = Calendar.getInstance();
-        int hour = currentTime.get(Calendar.HOUR_OF_DAY);
-        int minute = currentTime.get(Calendar.MINUTE);
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+                        hour = hourOfDay; // Mettre à jour l'heure
+                        Modifier.this.minute = minute; // Mettre à jour les minutes
                     }
                 }, hour, minute, true);
-
         timePickerDialog.show();
     }
 

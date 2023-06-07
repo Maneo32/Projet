@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ import java.util.Date;
 public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
         private ArrayList<Integer> number = new ArrayList<Integer>();
 
+    private int hour = new Date().getHours();
+    private int minute = new Date().getMinutes();
         private long selectedDateInMillis = new Date().getTime();
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +53,35 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
             });
         }
 
+    public void showTimePickerDialog(View view) {
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        hour = hourOfDay; // Mettre à jour l'heure
+                        Ajouter.this.minute = minute; // Mettre à jour les minutes
+                    }
+                }, hour, minute, true);
+        timePickerDialog.show();
+    }
+
     public void onClickClose(View view) {
         Intent returnIntent = new Intent();
         EditText nom = (EditText) findViewById(R.id.nom);
         EditText description = (EditText) findViewById(R.id.Description);
         Spinner ordre = (Spinner) findViewById(R.id.spinner);
+        Date date = new Date(selectedDateInMillis);
+        date.setHours(hour); // Utiliser l'heure déjà stockée
+        date.setMinutes(minute); // Utiliser les minutes déjà stockées
+        selectedDateInMillis = date.getTime();
         String l = "";
-        l=l+(nom.getText().toString())+"!";
-        l=l+(description.getText())+"!";
-        l=l+(ordre.getSelectedItem().toString())+"!";
-        l=l+(selectedDateInMillis);
+        l = l + (nom.getText().toString()) + "!";
+        l = l + (description.getText()) + "!";
+        l = l + (ordre.getSelectedItem().toString()) + "!";
+        l = l + (selectedDateInMillis);
 
-        returnIntent.putExtra(MainActivity.REQUEST_RESULT,l);
+        returnIntent.putExtra(MainActivity.REQUEST_RESULT, l);
         setResult(RESULT_OK, returnIntent);
         finish();
     }
