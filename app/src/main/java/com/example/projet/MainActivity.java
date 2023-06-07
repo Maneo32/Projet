@@ -80,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
 
         StringBuilder builder = new StringBuilder();
         db = new BaseDonnees(getApplicationContext());
+        SQLiteDatabase dbs = db.getWritableDatabase();
+        String createTableQuery = "CREATE TABLE Rappel (nom TEXT, description TEXT, ordre TEXT, date TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        String createTableQuery2 = "CREATE TABLE supp (nom TEXT, description TEXT, ordre TEXT, date TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        String createTableQuery3 = "CREATE TABLE Termine (nom TEXT, description TEXT, ordre TEXT, date TEXT, id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        dbs.execSQL(createTableQuery);
+        dbs.execSQL(createTableQuery2);
+        dbs.execSQL(createTableQuery3);
         ArrayList<Evenement> evenements = new ArrayList<Evenement>();
         evenements.addAll(db.recupererDonnees());
 
