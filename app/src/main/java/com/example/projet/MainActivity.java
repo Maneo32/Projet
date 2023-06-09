@@ -169,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout.LayoutParams.WRAP_CONTENT
             ));
             dateTextView.setTextSize(14);
+            dateTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
+            descriptionTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
+            titleTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
             dateTextView.setPadding(8, 0, 8, 8);
             dateTextView.setText("Date: " + dateMieux + " " + evenement.getDate().getHours()+":"+evenement.getDate().getMinutes());
 
