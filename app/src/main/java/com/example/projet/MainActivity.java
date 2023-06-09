@@ -1,15 +1,22 @@
 package com.example.projet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.NotificationCompat;
 
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -91,12 +98,14 @@ public class MainActivity extends AppCompatActivity {
 
         evenements.addAll(db.recupererDonnees());
 
+
         for (Evenement evenement : evenements) {
-            LinearLayout itemLayout = new LinearLayout(this);
-            itemLayout.setOrientation(LinearLayout.HORIZONTAL);
-            itemLayout.setLayoutParams(new LinearLayout.LayoutParams(
+            LinearLayout cardContainer = new LinearLayout(this);
+            cardContainer.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            cardContainer.setOrientation(LinearLayout.HORIZONTAL);
 
             CheckBox checkBox = new CheckBox(this);
             checkBox.setId(evenement.getId());
@@ -113,21 +122,79 @@ public class MainActivity extends AppCompatActivity {
             });
             checkBox.setLayoutParams(new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
 
-            textView = new TextView(this);
-            textView.setLayoutParams(new LinearLayout.LayoutParams(
+            CardView cv = new CardView(this);
+            cv.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            textView.setText(evenement.toString());
+                    1 // Poids 1 pour occuper l'espace restant
+            ));
+            cv.setCardElevation(4);
 
-            itemLayout.addView(checkBox);
-            itemLayout.addView(textView);
+            LinearLayout innerContainer = new LinearLayout(this);
+            innerContainer.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            innerContainer.setOrientation(LinearLayout.VERTICAL);
 
-            container.addView(itemLayout);
+            TextView titleTextView = new TextView(this);
+            titleTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            titleTextView.setTextSize(16);
+            titleTextView.setTypeface(null, Typeface.BOLD);
+            titleTextView.setPadding(8, 8, 8, 8);
+            titleTextView.setText(evenement.getNom().toUpperCase());
 
-            builder.append(evenement.toString()).append("\n");
+            TextView descriptionTextView = new TextView(this);
+            descriptionTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            descriptionTextView.setTextSize(14);
+            descriptionTextView.setPadding(8, 0, 8, 8);
+            descriptionTextView.setText(evenement.getDescription());
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dateMieux = sdf.format(evenement.getDate());
+            TextView dateTextView = new TextView(this);
+            dateTextView.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            dateTextView.setTextSize(14);
+            dateTextView.setPadding(8, 0, 8, 8);
+            dateTextView.setText("Date: " + dateMieux + " " + evenement.getDate().getHours()+":"+evenement.getDate().getMinutes());
+
+            if(evenement.getOrdre()==1){
+                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.WHITE));
+            }
+            else if(evenement.getOrdre()==2){
+                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.BLUE));
+            }
+            else if (evenement.getOrdre()==3){
+                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.RED));
+            }
+
+            innerContainer.addView(titleTextView);
+            innerContainer.addView(descriptionTextView);
+            innerContainer.addView(dateTextView);
+
+            cv.addView(innerContainer);
+
+            cardContainer.addView(checkBox);
+            cardContainer.addView(cv);
+
+            container.addView(cardContainer);
+            container.addView(new TextView(this));
         }
+
+
     }
 
 
