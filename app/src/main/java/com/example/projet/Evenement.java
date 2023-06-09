@@ -25,7 +25,8 @@ public class Evenement {
                 "\n Description :'" + description + '\'' +
                 " \n Ordre : " + ordre +
                 "\n Date :" + dateMieux+
-                "\n heure/minute :"+ date.getHours() +" "+date.getMinutes();
+                "\n heure/minute :"+ date.getHours() +" "+date.getMinutes()+
+                "\n";
     }
 
 

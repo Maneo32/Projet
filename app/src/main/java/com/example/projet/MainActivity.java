@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Utiliser performOnCreate() au lieu de setContentView()
         performOnCreate();
+
     }
 
 
@@ -171,15 +172,17 @@ public class MainActivity extends AppCompatActivity {
             dateTextView.setPadding(8, 0, 8, 8);
             dateTextView.setText("Date: " + dateMieux + " " + evenement.getDate().getHours()+":"+evenement.getDate().getMinutes());
 
-            if(evenement.getOrdre()==1){
-                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.WHITE));
+            if (evenement.getOrdre() == 1) {
+                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#FDF5E6")));
+            } else if (evenement.getOrdre() == 2) {
+                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#AED6F1")));
+            } else if (evenement.getOrdre() == 3) {
+                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#9A7ED0")));
             }
-            else if(evenement.getOrdre()==2){
-                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.BLUE));
-            }
-            else if (evenement.getOrdre()==3){
-                cv.setCardBackgroundColor(ColorStateList.valueOf(Color.RED));
-            }
+
+
+
+
 
             innerContainer.addView(titleTextView);
             innerContainer.addView(descriptionTextView);
