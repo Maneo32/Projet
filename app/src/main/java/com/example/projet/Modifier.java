@@ -54,6 +54,7 @@ public class Modifier extends AppCompatActivity implements AdapterView.OnItemSel
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month, dayOfMonth);
                 selectedDateInMillis = calendar.getTimeInMillis();
+                showTimePickerDialog();
 
                 // Utilisez la valeur de selectedDateInMillis comme vous le souhaitez
             }
@@ -98,7 +99,7 @@ public class Modifier extends AppCompatActivity implements AdapterView.OnItemSel
 
 
 
-    public void showTimePickerDialog(View view) {
+    public void showTimePickerDialog() {
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {

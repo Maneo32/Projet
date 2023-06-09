@@ -47,13 +47,14 @@ public class Ajouter extends AppCompatActivity implements AdapterView.OnItemSele
                     Calendar calendar = Calendar.getInstance();
                     calendar.set(year, month, dayOfMonth);
                     selectedDateInMillis = calendar.getTimeInMillis();
+                    showTimePickerDialog();
 
                     // Utilisez la valeur de selectedDateInMillis comme vous le souhaitez
                 }
             });
         }
 
-    public void showTimePickerDialog(View view) {
+    public void showTimePickerDialog() {
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this,
                 new TimePickerDialog.OnTimeSetListener() {
