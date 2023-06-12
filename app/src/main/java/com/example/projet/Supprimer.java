@@ -117,7 +117,16 @@ public class Supprimer extends AppCompatActivity {
             } else if (evenement.getOrdre() == 3) {
                 cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#9A7ED0")));
             }
+            innerContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox.setChecked(!checkBox.isChecked());
+                }
+            });
 
+            dateTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
+            descriptionTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
+            titleTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
             innerContainer.addView(titleTextView);
             innerContainer.addView(descriptionTextView);
             innerContainer.addView(dateTextView);

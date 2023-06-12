@@ -106,6 +106,13 @@ public class Terminer extends AppCompatActivity {
             dateTextView.setPadding(8, 0, 8, 8);
             dateTextView.setText("Date: " + dateMieux + " " + evenement.getDate().getHours()+":"+evenement.getDate().getMinutes());
 
+            innerContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox.setChecked(!checkBox.isChecked());
+                }
+            });
+
             if (evenement.getOrdre() == 1) {
                 cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#FDF5E6")));
             } else if (evenement.getOrdre() == 2) {
@@ -113,6 +120,10 @@ public class Terminer extends AppCompatActivity {
             } else if (evenement.getOrdre() == 3) {
                 cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#9A7ED0")));
             }
+
+            dateTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
+            descriptionTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
+            titleTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
 
             innerContainer.addView(titleTextView);
             innerContainer.addView(descriptionTextView);
@@ -126,7 +137,6 @@ public class Terminer extends AppCompatActivity {
             container.addView(itemLayout);
             container.addView(new TextView(this));
 
-            builder.append(evenement.toString()).append("\n");
         }
     }
 

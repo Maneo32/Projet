@@ -9,6 +9,9 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
@@ -22,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -39,8 +43,10 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import com.example.projet.BaseDonnees;
@@ -97,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout container = findViewById(R.id.container);
         container.removeAllViews();
 
-        StringBuilder builder = new StringBuilder();
         db = new BaseDonnees(getApplicationContext());
         ArrayList<Evenement> evenements = new ArrayList<Evenement>();
         SQLiteDatabase dbs = db.getWritableDatabase();
@@ -178,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
             descriptionTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
             titleTextView.setTextColor(ColorStateList.valueOf(Color.BLACK));
             dateTextView.setPadding(8, 0, 8, 8);
-            dateTextView.setText("Date: " + dateMieux + " " + evenement.getDate().getHours()+":"+evenement.getDate().getMinutes());
+            dateTextView.setText("Date: " + dateMieux + " " + evenement.getDate().getHours() + ":" + evenement.getDate().getMinutes());
 
             if (evenement.getOrdre() == 1) {
                 cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#FDF5E6")));
@@ -188,31 +193,60 @@ public class MainActivity extends AppCompatActivity {
                 cv.setCardBackgroundColor(ColorStateList.valueOf(Color.parseColor("#9A7ED0")));
             }
 
+            innerContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkBox.setChecked(!checkBox.isChecked());
+                }
+            });
 
-            am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-            ajouterAlarme(1, evenement.getDate().getYear(), evenement.getDate().getMonth(), evenement.getDate().getDay(), evenement.getDate().getHours(), evenement.getDate().getMinutes());
+                    CountDownTimer timer = new CountDownTimer(Long.MAX_VALUE, 1000) { // Vérifie toutes les secondes
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+                            Date date = new Date();
 
-            innerContainer.addView(titleTextView);
-            innerContainer.addView(descriptionTextView);
-            innerContainer.addView(dateTextView);
+                            if (date.getMinutes() == evenement.getDate().getMinutes() && date.getHours() == evenement.getDate().getHours() && date.getDay() == evenement.getDate().getDay() && date.getMonth() == evenement.getDate().getMonth() && date.getYear() == evenement.getDate().getYear() && date.getSeconds() == evenement.getDate().getSeconds()) {
+                                notif receiver = new notif();
+                                receiver.onReceive(getApplicationContext(), null);
+                            }
+                        }
 
-            cv.addView(innerContainer);
+                        @Override
+                        public void onFinish() {
 
-            cardContainer.addView(checkBox);
-            cardContainer.addView(cv);
+                        }
+                    };
 
-            container.addView(cardContainer);
-            container.addView(new TextView(this));
-        }
+                    timer.start(); // Démarrer le compte à rebours
 
 
-    }
+
+
+
+
+                    innerContainer.addView(titleTextView);
+                    innerContainer.addView(descriptionTextView);
+                    innerContainer.addView(dateTextView);
+
+                    cv.addView(innerContainer);
+
+                    cardContainer.addView(checkBox);
+                    cardContainer.addView(cv);
+
+                    container.addView(cardContainer);
+                    container.addView(new TextView(this));
+                }
+            }
 
 
     public void ajouter(View view) {
         Intent intent = new Intent(this, Ajouter.class);
-
         startActivityForResult(intent, 1);
+
+
+
+
+
     }
 
 
@@ -274,16 +308,7 @@ public class MainActivity extends AppCompatActivity {
     //------------------------------------------------------
     //Notifications
 
-    public void ajouterAlarme(int id, int year, int month, int day, int hour, int minute)
-    {
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month, day, hour, minute);
 
-        Intent intent = new Intent(this, NotificationReceiver.class);
-        PendingIntent operation = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
-        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), operation);
-
-    }
 
 
 }
