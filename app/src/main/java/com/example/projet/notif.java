@@ -18,6 +18,13 @@ import androidx.core.app.NotificationManagerCompat;
 public class notif extends BroadcastReceiver {
 
     NotificationManager nm;
+    private String nom;
+    private int ordre;
+
+    public notif(String nom, int ordre) {
+        this.nom = nom;
+        this.ordre=ordre;
+    }
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -29,8 +36,8 @@ public class notif extends BroadcastReceiver {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "id")
                 .setSmallIcon(android.R.drawable.stat_notify_sync)
-                .setContentTitle("notif")
-                .setContentText("texte");
+                .setContentTitle(nom)
+                .setContentText(String.valueOf(ordre));
 
         Notification notification = builder.build();
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);

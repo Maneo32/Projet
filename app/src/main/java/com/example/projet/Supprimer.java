@@ -88,7 +88,7 @@ public class Supprimer extends AppCompatActivity {
             titleTextView.setTextSize(16);
             titleTextView.setTypeface(null, Typeface.BOLD);
             titleTextView.setPadding(8, 8, 8, 8);
-            titleTextView.setText(evenement.getNom().toUpperCase());
+            titleTextView.setText(evenement.getDescription().toUpperCase());
 
             TextView descriptionTextView = new TextView(this);
             descriptionTextView.setLayoutParams(new LinearLayout.LayoutParams(
@@ -97,7 +97,7 @@ public class Supprimer extends AppCompatActivity {
             ));
             descriptionTextView.setTextSize(14);
             descriptionTextView.setPadding(8, 0, 8, 8);
-            descriptionTextView.setText(evenement.getDescription());
+            descriptionTextView.setText(evenement.getNom());
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             String dateMieux = sdf.format(evenement.getDate());

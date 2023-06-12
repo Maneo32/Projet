@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         // Utiliser performOnCreate() au lieu de setContentView()
@@ -206,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                             Date date = new Date();
 
                             if (date.getMinutes() == evenement.getDate().getMinutes() && date.getHours() == evenement.getDate().getHours() && date.getDay() == evenement.getDate().getDay() && date.getMonth() == evenement.getDate().getMonth() && date.getYear() == evenement.getDate().getYear() && date.getSeconds() == evenement.getDate().getSeconds()) {
-                                notif receiver = new notif();
+                                notif receiver = new notif(evenement.getNom(), evenement.getOrdre());
                                 receiver.onReceive(getApplicationContext(), null);
                             }
                         }
