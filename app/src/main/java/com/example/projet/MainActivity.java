@@ -3,13 +3,17 @@ package com.example.projet;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -35,6 +39,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
@@ -42,6 +47,7 @@ import com.example.projet.BaseDonnees;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Evenement> supp = new ArrayList<>();
+    private AlarmManager am;
 
     private TextView textView;
     private BaseDonnees db;
@@ -82,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Utiliser performOnCreate() au lieu de setContentView()
         performOnCreate();
-
     }
 
 
@@ -184,8 +189,8 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-
-
+            am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            ajouterAlarme(1, evenement.getDate().getYear(), evenement.getDate().getMonth(), evenement.getDate().getDay(), evenement.getDate().getHours(), evenement.getDate().getMinutes());
 
             innerContainer.addView(titleTextView);
             innerContainer.addView(descriptionTextView);
@@ -253,9 +258,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     public void accesModif(View View) {
-        if (supp.size()==1) {
+        if (supp.size() == 1) {
             Intent intent = new Intent(this, Modifier.class);
             intent.putExtra("nom", supp.get(0).getNom());
             intent.putExtra("desc", supp.get(0).getDescription());
@@ -265,5 +269,22 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, 2);
         }
     }
+
+
+    //------------------------------------------------------
+    //Notifications
+
+    public void ajouterAlarme(int id, int year, int month, int day, int hour, int minute)
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, month, day, hour, minute);
+
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        PendingIntent operation = PendingIntent.getBroadcast(this, id, intent, PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_IMMUTABLE);
+        am.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), operation);
+
+    }
+
+
 }
 
